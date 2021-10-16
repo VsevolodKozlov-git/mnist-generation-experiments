@@ -34,3 +34,5 @@ def display_rows_as_images(X, example_width=None, figsize=(10, 10), reshape_orde
                       cmap='Greys', extent=[0, 1, 0, 1])
         ax.axis('off')
     return  fig, ax_array
+
+
