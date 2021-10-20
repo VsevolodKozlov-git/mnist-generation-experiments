@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-def display_rows_as_images(X, example_width=None, figsize=(10, 10), reshape_order='C'):
+def display_rows_as_images(X, example_width=None, subplots_rows_cols=None, fig_multipliers=(1, 1), reshape_order='C'):
     """
     Displays 2D data stored in X in a nice grid.
     """
@@ -20,10 +20,14 @@ def display_rows_as_images(X, example_width=None, figsize=(10, 10), reshape_orde
     example_height = n / example_width
 
     # Compute number of items to display
-    display_rows = int(np.floor(np.sqrt(m)))
-    display_cols = int(np.ceil(m / display_rows))
+    if subplots_rows_cols is None:
+        subplots_rows = int(np.floor(np.sqrt(m)))
+        subplots_cols = int(np.ceil(m / subplots_rows))
+    else:
+        subplots_rows, subplots_cols = subplots_rows_cols
     # creating subplots
-    fig, ax_array = plt.subplots(display_rows, display_cols, figsize=figsize)
+    figsize = (subplots_cols * fig_multipliers[0], subplots_rows * fig_multipliers[1])
+    fig, ax_array = plt.subplots(subplots_rows, subplots_cols, figsize=figsize)
     fig.subplots_adjust(wspace=0.025, hspace=0.025)
 
     ax_array = [ax_array] if m == 1 else ax_array.ravel()
